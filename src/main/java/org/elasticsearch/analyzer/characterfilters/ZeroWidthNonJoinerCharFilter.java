@@ -10,16 +10,16 @@ import java.util.regex.Pattern;
  */
 public class ZeroWidthNonJoinerCharFilter extends PatternReplaceCharFilter {
 
-    private static final String zwnjPattern1 = "(?<=[^ ]\\u0647) (?=\\u06CC)";
-    private static final String zwnjPattern2 = "(?<=(\\u0645\\u06CC|\\u0646\\u0645\\u06CC)) (?=[^ ])";
-    private static final String zwnjPattern3 = "(?<=[^ ]) (?=(\\u0647\\u0627|\\u0647\\u0627\\u06CC|\\u062A\\u0631|\\u062A\\u0631\\u06CC|\\u062A\\u0631\\u06CC\\u0646))";
-    private static final String zwnjPattern4 = "(?<=[^ ]\\u0647) (?=(\\u0627\\u0645|\\u0627\\u062A|\\u0627\\u0634|\\u0627\\u06CC))";
+    private static final String NonStandardZWNJPattern = "[\\u200B\\u200D\\u200E\\u200F\\u001F\\u00AC]";
+    private static final String YehPattern = "(?<=[^ ]\\u0647) (?=\\u06CC|\\u064A)";
+    private static final String presentContinuousPattern = "(?<=([^\\p{L}]\\u0645\\u06CC|[^\\p{L}]\\u0646\\u0645\\u06CC)) (?=[^ ])";
+    private static final String commonSuffixesPattern = "(?<=[^ ]) (?=(\\u0647\\u0627|\\u0647\\u0627\\u06CC|\\u0647\\u0627\\u064A|\\u062A\\u0631|\\u062A\\u0631\\u06CC|\\u062A\\u0631\\u06CC\\u0646|\\u062A\\u0631\\u064A|\\u062A\\u0631\\u064A\\u0646))";
 
     private ZeroWidthNonJoinerCharFilter(Pattern pattern, String replacement, Reader in) {
         super(pattern, replacement, in);
     }
 
     public ZeroWidthNonJoinerCharFilter(Reader in) {
-        this(Pattern.compile(zwnjPattern1 + "|" + zwnjPattern2 + "|" + zwnjPattern3 + "|" + zwnjPattern4), "\u200C", in);
+        this(Pattern.compile(NonStandardZWNJPattern + "|" + YehPattern + "|" + presentContinuousPattern + "|" + commonSuffixesPattern), "\u200C", in);
     }
 }

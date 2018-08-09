@@ -10,7 +10,11 @@ public class PersianNormalizer {
     public static final char ALEF_HAMZA_ABOVE = '\u0623';
     public static final char ALEF_HAMZA_BELOW = '\u0625';
 
+    public static final char WAW = '\u0648';
+    public static final char WAW_HAMZA_ABOVE = '\u0624';
+
     public static final char YEH = '\u064A';
+    public static final char YEH_HAMZA_ABOVE = '\u0626';
     public static final char FARSI_YEH = '\u06CC';
 
     public static final char KAF = '\u0643';
@@ -45,7 +49,15 @@ public class PersianNormalizer {
                     stringBuilder.append(ALEF);
                     break;
 
+                case WAW_HAMZA_ABOVE:
+                    stringBuilder.append(WAW);
+                    break;
+
                 case YEH:
+                    stringBuilder.append(FARSI_YEH);
+                    break;
+
+                case YEH_HAMZA_ABOVE:
                     stringBuilder.append(FARSI_YEH);
                     break;
 

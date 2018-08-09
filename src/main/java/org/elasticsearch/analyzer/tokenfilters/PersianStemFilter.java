@@ -5,28 +5,32 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nariman on 10/28/2017.
  */
 public final class PersianStemFilter extends TokenFilter {
 
-    private Set<String> suffixes;
+    private List<String> suffixes;
     private final CharTermAttribute termAttribute = addAttribute(CharTermAttribute.class);
 
     public PersianStemFilter(TokenStream in) {
         super(in);
+        suffixes = new ArrayList<>();
+        suffixes.add("یی");
+        suffixes.add("ی");
+        suffixes.add("ها");
+        suffixes.add("تر");
+        suffixes.add("ترین");
+        suffixes.add("ان");
+        suffixes.add("ات");
+        suffixes.add("\u200c");
     }
 
     @Override
     public boolean incrementToken() throws IOException {
-
-        suffixes = new HashSet<>();
-        suffixes.add("ها");
-        suffixes.add("تر");
-        suffixes.add("ترین");
 
         if (input.incrementToken()) {
             String token = new String(termAttribute.buffer(), 0, termAttribute.length()).trim();
@@ -40,7 +44,6 @@ public final class PersianStemFilter extends TokenFilter {
 
                 termAttribute.setEmpty();
                 termAttribute.append(token);
-
             }
 
             return true;
