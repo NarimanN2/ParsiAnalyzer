@@ -23,12 +23,11 @@ An analyzer is really just a wrapper that combines Character filters, Tokenizer,
   
 - Stem Persian words
   - Remove common Persian suffixes. for example, `ها` or `ان`.
-  - Stemming reduces precision so this feature is disabled by default.
-
+  
 ## Installation
-To install the plugin for Elasticsearch 5.6.3, run this command:
+To install the plugin for Elasticsearch 6.3.2, run this command:
 
-```bin\elasticsearch-plugin install https://github.com/NarimanN2/ParsiAnalyzer/releases/download/v1.0.0/ParsiAnalyzer-1.0.0.zip```
+```bin\elasticsearch-plugin install https://www.dropbox.com/s/2sczcj1372xsq7k/ParsiAnalyzer-%206.3.2.zip?dl=1```
 
 ## Usage
 To see how this plugin works, you can use Elasticsearch's `analyze` API:
