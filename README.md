@@ -27,7 +27,7 @@ An analyzer is really just a wrapper that combines Character filters, Tokenizer,
 ## Installation
 To install the plugin for Elasticsearch 6.4.2, run this command:
 
-```bin\elasticsearch-plugin install https://www.dropbox.com/s/niy3kg6ufossx6h/ParsiAnalyzer-6.4.2.zip?dl=1```
+```bin\elasticsearch-plugin install https://www.dropbox.com/s/udi336xjh2ir7gk/ParsiAnalyzer-7.4.0.zip?dl=1```
 
 ## Usage
 To see how this plugin works, you can use Elasticsearch's `analyze` API:
