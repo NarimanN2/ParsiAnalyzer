@@ -25,7 +25,7 @@ An analyzer is really just a wrapper that combines Character filters, Tokenizer,
   - Remove common Persian suffixes. for example, `ها` or `ان`.
   
 ## Installation
-To install the plugin for Elasticsearch 6.4.2, run this command:
+To install the plugin for Elasticsearch 7.4.0, run this command:
 
 ```bin\elasticsearch-plugin install https://www.dropbox.com/s/udi336xjh2ir7gk/ParsiAnalyzer-7.4.0.zip?dl=1```
 
