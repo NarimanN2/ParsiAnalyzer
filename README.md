@@ -29,6 +29,18 @@ To install the plugin for Elasticsearch 7.10.2, run this command:
 
 ```bin\elasticsearch-plugin install https://www.dropbox.com/s/k5gdmnmyw4aonfz/ParsiAnalyzer-7.10.2.zip?dl=1```
 
+## Build
+If you want to build ParsiAnalyzer for any specific version of Elasticsearch, follow these steps:
+1. Make sure you've installed JDK and Maven on your computer
+1. Clone project
+1. Open ```pom.xml```
+1. Under dependencies tag, change Elasticsearch version to your desired version
+1. Open ```plugin-descriptor.properties```
+1. Change elasticsearch.version to your desired version
+1. Run this maven command: ```mvn clean package```
+1. In the target/releases folder, you’ll now find a zip file. install the plugin using this command:
+```bin/elasticsearch-plugin install file:///path/to/ParsiAnalyzer.zip```
+
 ## Usage
 To see how this plugin works, you can use Elasticsearch's `analyze` API:
 ```
