@@ -1,6 +1,9 @@
 package org.elasticsearch.analyzer;
 
-import org.apache.lucene.analysis.*;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.core.DecimalDigitFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.elasticsearch.analyzer.characterfilters.ZeroWidthNonJoinerCharFilter;
@@ -15,7 +18,7 @@ import java.util.List;
 /**
  * Created by Nariman on 10/28/2017.
  */
-public class ParsiAnalyzer extends Analyzer {
+public class ParsiStandardAnalyzer extends Analyzer {
 
     public static final CharArraySet PERSIAN_STOP_WORDS_SET;
 
@@ -31,7 +34,6 @@ public class ParsiAnalyzer extends Analyzer {
         TokenStream result = new PersianStopFilter(source, PERSIAN_STOP_WORDS_SET);
         result = new DecimalDigitFilter(result);
         result = new PersianNormalizationFilter(result);
-        result = new PersianStemFilter(result);
         return new TokenStreamComponents(source, result);
     }
 

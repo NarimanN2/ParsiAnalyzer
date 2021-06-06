@@ -8,7 +8,7 @@ import org.elasticsearch.analyzer.tokenfilters.PersianStopFilterFactory;
 import org.elasticsearch.index.analysis.AnalyzerProvider;
 import org.elasticsearch.index.analysis.CharFilterFactory;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
-import org.elasticsearch.indices.analysis.AnalysisModule;
+import org.elasticsearch.indices.analysis.AnalysisModule.AnalysisProvider;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
 
@@ -23,13 +23,16 @@ import java.util.Map;
 public class ParsiAnalyzerPlugin extends Plugin implements AnalysisPlugin {
 
     @Override
-    public Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> getAnalyzers() {
-        return Collections.singletonMap("parsi", ParsiAnalyzerProvider::new);
+    public Map<String, AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> getAnalyzers() {
+        Map<String, AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> analyzers = new HashMap<>();
+        analyzers.put("parsi", ParsiAnalyzerProvider::new);
+        analyzers.put("parsi_standard", ParsiStandardAnalyzerProvider::new);
+        return analyzers;
     }
 
     @Override
-    public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
-        Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> tokenFilters = new HashMap();
+    public Map<String, AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
+        Map<String, AnalysisProvider<TokenFilterFactory>> tokenFilters = new HashMap();
         tokenFilters.put("parsi_normalizer", PersianNormalizationFilterFactory::new);
         tokenFilters.put("parsi_stem_filter", PersianStemFilterFactory::new);
         tokenFilters.put("parsi_stop_filter", PersianStopFilterFactory::new);
@@ -37,7 +40,7 @@ public class ParsiAnalyzerPlugin extends Plugin implements AnalysisPlugin {
     }
 
     @Override
-    public Map<String, AnalysisModule.AnalysisProvider<CharFilterFactory>> getCharFilters() {
+    public Map<String, AnalysisProvider<CharFilterFactory>> getCharFilters() {
         return Collections.singletonMap("zwnj_filter", ZeroWidthNonJoinerCharFilterFactory::new);
     }
 

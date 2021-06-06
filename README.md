@@ -25,9 +25,9 @@ An analyzer is really just a wrapper that combines Character filters, Tokenizer,
   - Remove common Persian suffixes. for example, `ها` or `ان`.
   
 ## Installation
-To install the plugin for Elasticsearch 7.10.2, run this command:
+To install the plugin for Elasticsearch 7.13.1, run this command:
 
-```bin\elasticsearch-plugin install https://www.dropbox.com/s/k5gdmnmyw4aonfz/ParsiAnalyzer-7.10.2.zip?dl=1```
+```bin\elasticsearch-plugin install https://www.dropbox.com/s/cr61dmnx95taivi/ParsiAnalyzer-7.13.1.zip?dl=1```
 
 ## Build
 If you want to build ParsiAnalyzer for any specific version of Elasticsearch, follow these steps:
@@ -50,7 +50,14 @@ POST _analyze
   "text" : "روباه قهوه‌اي چابك از روی سگ تنبل می پرد"
 }
 ```
-This will give you these tokens: `[روباه,قهوه‌ای,چابک,روی,سگ,تنبل,می‌پرد]`
+If you find stemming a little annoying, you can always use the standard variation of ParsiAnalyzer:
+```
+POST _analyze
+{
+  "analyzer" : "parsi_standard",
+  "text" : "روباه قهوه‌اي چابك از روی سگ تنبل می پرد"
+}
+```
 
 ParsiAnalyzer can be specified directly in the field mapping as follows: 
 ```
