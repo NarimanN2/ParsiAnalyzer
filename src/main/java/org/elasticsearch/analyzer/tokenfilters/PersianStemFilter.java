@@ -35,7 +35,7 @@ public final class PersianStemFilter extends TokenFilter {
         if (input.incrementToken()) {
             String token = new String(termAttribute.buffer(), 0, termAttribute.length()).trim();
 
-            if (token.length() > 0) {
+            if (token.length() > 2) {
 
                 for (String suffix : suffixes) {
                     if (token.endsWith(suffix))
