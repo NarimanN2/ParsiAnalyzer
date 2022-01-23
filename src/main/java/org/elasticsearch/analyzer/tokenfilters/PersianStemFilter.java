@@ -33,17 +33,24 @@ public final class PersianStemFilter extends TokenFilter {
     public boolean incrementToken() throws IOException {
 
         if (input.incrementToken()) {
-            String token = new String(termAttribute.buffer(), 0, termAttribute.length()).trim();
+            String originToken , token;
+            
+            originToken = token = new String(termAttribute.buffer(), 0, termAttribute.length()).trim();
 
             if (token.length() > 3) {
-
+            
                 for (String suffix : suffixes) {
                     if (token.endsWith(suffix))
                         token = token.substring(0, token.length() - suffix.length());
                 }
 
                 termAttribute.setEmpty();
-                termAttribute.append(token);
+
+                if (token.length() > 1)
+                    termAttribute.append(token);
+                else
+                    termAttribute.append(originToken);
+    
             }
 
             return true;
